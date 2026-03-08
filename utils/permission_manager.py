@@ -46,18 +46,12 @@ except (ImportError, AttributeError, ValueError):
     pass
 
 # Import Input Monitoring check (for pynput keyboard monitoring)
-_input_monitoring_api_available = False
-
-
 def check_input_monitoring_permission():
     """
     Check if the app has Input Monitoring permissions (kTCCServicePostEvent).
     This is required for pynput to monitor keyboard events.
     """
     return check_input_monitoring_permission_behavioral()
-
-
-_input_monitoring_api_available = True
 
 # Try to import the microphone permission checking function
 _mic_check_available = False
@@ -194,7 +188,7 @@ def check_keyboard_permissions(verbose=True, console=None):
 
     # Check 1: Input Monitoring permissions (required for pynput to capture keystrokes)
     input_monitoring_granted = None
-    if _input_monitoring_api_available and sys.platform == "darwin":
+    if sys.platform == "darwin":
         if verbose:
             console.print(
                 "Checking Input Monitoring permissions (required for keyboard capture)..."

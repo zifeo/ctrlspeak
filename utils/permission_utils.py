@@ -17,7 +17,7 @@ def check_input_monitoring_permission_behavioral():
     try:
         test_listener = keyboard.Listener(on_press=lambda k: None)
         test_listener.start()
-        time.sleep(0.1)
+        time.sleep(0.5)
         is_alive = test_listener.is_alive()
         test_listener.stop()
         return is_alive
