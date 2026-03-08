@@ -69,6 +69,8 @@ class PermissionTester:
         
         keyboard_granted = permissions_status["keyboard"]["granted"]
         keyboard_working = permissions_status["keyboard"]["working"]
+        keyboard_accessibility = permissions_status["keyboard"].get("accessibility", False)
+        keyboard_input_monitoring = permissions_status["keyboard"].get("input_monitoring", False)
         
         microphone_granted = permissions_status["microphone"]["granted"]
         microphone_working = permissions_status["microphone"]["working"]
@@ -94,6 +96,9 @@ class PermissionTester:
         
         self.console.print(f"\nKeyboard Monitoring: {kb_status}")
         self.console.print(f"  - Permission Granted: {'[green]Yes[/green]' if keyboard_granted else '[red]No[/red]'}")
+        if sys.platform == "darwin":
+            self.console.print(f"  - Accessibility Permission: {'[green]Yes[/green]' if keyboard_accessibility else '[red]No[/red]'}")
+            self.console.print(f"  - Input Monitoring Permission: {'[green]Yes[/green]' if keyboard_input_monitoring else '[red]No[/red]'}")
         self.console.print(f"  - Functionality Working: {'[green]Yes[/green]' if keyboard_working else '[red]No[/red]'}")
         
         if permissions_status["keyboard"]["errors"]:
@@ -114,14 +119,16 @@ class PermissionTester:
             parent_app = permission_manager.detect_parent_app()
             
             if not keyboard_granted:
-                self.console.print(f"- Make sure [bold]{parent_app}[/bold] has accessibility permissions in System Settings")
+                self.console.print(f"- Make sure [bold]{parent_app}[/bold] has accessibility and input monitoring permissions in System Settings")
                 
                 if sys.platform == "darwin":  # macOS specific
-                    self.console.print("- For accessibility permissions on macOS:")
+                    self.console.print("- For keyboard permissions on macOS:")
                     self.console.print("  1. Go to System Settings → Privacy & Security → Accessibility")
-                    self.console.print(f"  2. Make sure [bold]{parent_app}[/bold] is CHECKED (not Python or ctrlSPEAK)")
-                    self.console.print("  3. If already checked, try removing and re-adding the permission")
-                    self.console.print("  4. Log out and log back in, or restart your computer")
+                    self.console.print(f"  2. Make sure [bold]{parent_app}[/bold] is CHECKED")
+                    self.console.print("  3. Go to System Settings → Privacy & Security → Input Monitoring")
+                    self.console.print(f"  4. Make sure [bold]{parent_app}[/bold] is CHECKED")
+                    self.console.print("  5. If already checked, try removing and re-adding the permission")
+                    self.console.print("  6. Log out and log back in, or restart your computer")
             
             if not microphone_granted:
                 self.console.print("- Make sure the application has microphone permissions in System Settings")

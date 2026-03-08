@@ -30,6 +30,7 @@
 - **Permissions**:  
   - 🎤 Microphone (for recording)  
   - ⌨️ Accessibility (for shortcuts)  
+  - 🖱️ Input Monitoring (for keyboard capture on macOS)  
 *Grant these on first launch and you're good to go!*
 
 ### 📦 Installation
@@ -292,13 +293,14 @@ For most users, **Parakeet MLX** (default) provides the best balance of speed an
 The app requires:
 - Microphone access (for recording audio)
 - Accessibility permissions (for global keyboard shortcuts)
+- Input Monitoring (required for keyboard event capture on macOS)
 
 You'll be prompted to grant these permissions on first run.
 
 ## Troubleshooting
 
 - **No sound on recording start/stop**: Ensure your system volume is not muted
-- **Keyboard shortcuts not working**: Grant accessibility permissions in System Settings
+- **Keyboard shortcuts not working**: Grant both Accessibility AND Input Monitoring permissions in System Settings
 - **Transcription errors**: Try speaking more clearly or using the other model
 
 ## Credits
